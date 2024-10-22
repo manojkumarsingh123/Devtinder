@@ -2,6 +2,7 @@ const express =  require("express");
 
 const app =  express();
 
+
 //Request handler
 
 //when we hit hello in browser(making req) then server will response(Go to home page) 
