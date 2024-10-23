@@ -5,79 +5,44 @@ const app =  express();
 
 //Request handler
 
-//when we hit hello in browser(making req) then server will response(Go to home page)
 
 
-app.use("/",(req,res)=>{
-    res.send("Home")
+//This will only match GET call to "/user" 
+app.get("/user",(req,res)=>{
+    res.send({firstName:"manoj",lastname:"singh"});
 })
 
-// or app.use((req,res)=>{
-//     res.send("when make a request then response ok ")
-// });
-
-app.use("/hello",(req,res)=>{ 
-    res.send("Go to home page ")
-});
-
-app.use("/test",(req,res)=>{
-    res.send("test")
+//This will only match POST call to "/user"
+app.post("/user",(req,res)=>{
+    res.send("Successfully posted data");
 })
 
-
-
-/*here out put will be home for all
-
-Because here in first we used "/" means any request if come http://localhost:3000/ or http://localhost:3000/hello or http://localhost:3000/test
-
-it will go to home only means after / use any thing it will give home only 
-
-
-but here order of writing routes matters so if the case is
-
-
-
-app.use("/hello",(req,res)=>{ 
-    res.send("Go to home page ")
-});
-
-app.use("/test",(req,res)=>{
-    res.send("test")
+//This will only match DELETE call to "/user"
+app.delete("/user",(req,res)=>{
+    res.send("Successfully deleted data");
 })
 
-app.use("/",(req,res)=>{
-    res.send("Home")
+/*you can read requested data when send an api and use it later 
+
+let we made a api request 
+http://localhost:3000/user?name =manoj
+
+means we passed a parameter name as key and manoj as value  
+app.get("/user",(req,res)=>{
+    console.log(req.query);// out put will be  { 'name ': 'manoj' }
+    res.send({firstName:"manoj",lastname:"singh"});
 })
 
-and send request 
+let you requested 
+http://localhost:3000/user/107
+and want to read 107
 
-http://localhost:3000/ >> Home
-http://localhost:3000/hello >> Go to home page 
-http://localhost:3000/test >> test
-
-If chnaged the order
-
-app.use("/hello",(req,res)=>{ 
-    res.send("Go to home page ")
-});
-
-app.use("/",(req,res)=>{
-    res.send("Home")
+app.get("/user/:userid",(req,res)=>{
+    console.log(req.params); //output will be { userid: '107' }
+    res.send({firstName:"manoj",lastname:"singh"});
 })
-
-app.use("/test",(req,res)=>{
-    res.send("test")
-})
-
-http://localhost:3000/ >> Home
-http://localhost:3000/hello >> Go to home page 
-http://localhost:3000/test >> Home
 
 */
-// app.use((req,res)=>{
-//     res.send("when make a request then response ok ")
-// });
-
 
 app.listen(3000,()=>{
     console.log("server is started");
