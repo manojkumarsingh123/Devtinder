@@ -3,15 +3,15 @@ const connectDB = require("./src-file/config/database");
 const app = express();
 const User = require("./src-file/models/user");
 
+app.use(express.json()); // it is a middleware which convert req value to readable format
+
 app.post("/signup", async (req, res) => {
   // Creating a new instance of the User model
-  const user = new User({
-    firstName: "Sachin",
-    lastName: "Tendulkar",
-    emailId: "sachin@kohli.com",
-    password: "sachin@123",
-  });
+  console.log(req.body); // we get requested body data in readable format just beacuse of
 
+  //express.json
+
+  const user = new User(req.body);
   try {
     await user.save(); // saving the data in database
     res.send("User Added successfully!"); // after saving the data sending back to the response 
