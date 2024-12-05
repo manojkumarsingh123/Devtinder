@@ -2,24 +2,28 @@ const express = require("express");
 
 const app = express();
 
+const { adminAuth, userAuth } = require("./src-file/middlewares/auth");
 
-// One route can have multiple route handlers
-app.use('/user',(req,res,next)=>{
-  res.send("hello from first route");
-  console.log("From first route")
-  next()
-},
+app.use("/admin", adminAuth); // to handle all route start with /admin , it will first go to the
 
-(req,res,next)=>{
-  console.log("From second route")
-  res.send("hello from second route");
-  
-}
-)
+// adminauth and if token is valid then only move to the line num 11 otherwise give an error
 
-// here only get first output "hello from first route", and response send to client but 
-//console.log("From second route")  this line also execute but when try to send res.send("hello from second route"); second 
-// resonse from the same route after send one response we will get an error Cannot set headers after they are sent to the client
-//Beacause we already sent one response not allow to send another response for the same route
+app.post("/user/login", (req, res) => { // if you dont want auth dont use middleware just call the api 
+  res.send("User logged in successfully!");
+});
 
-app.listen(3000);
+app.get("/user/data", userAuth, (req, res) => { // userauth middle take care of all route start with userauth
+  res.send("User Data Sent");
+});
+
+app.get("/admin/getAllData", (req, res) => {
+  res.send("All Data Sent");
+});
+
+app.get("/admin/deleteUser", (req, res) => {
+  res.send("Deleted a user");
+});
+
+app.listen(3000, () => {
+  console.log("Server is successfully listening on port 7777...");
+});
