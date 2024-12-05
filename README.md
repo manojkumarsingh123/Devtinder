@@ -6,6 +6,6 @@ This is dev tinder api project
 
 # One route can have multiple route handler but accept only one response for single route
 
-# app.use, app.all, app.get,put,post,delete  , res.send , res.status(401).send("Unauthorized request") , req.query ,req.params, (modelname).save
+# app.use, app.all, app.get,put,post,delete  , res.send , res.status(401).send("Unauthorized request") , req.query ,req.params, (modelname).save , req.body , (modelname).find , (modelname).findOne
 
 
