@@ -2,28 +2,28 @@ const express = require("express");
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./src-file/middlewares/auth");
 
-app.use("/admin", adminAuth); // to handle all route start with /admin , it will first go to the
+app.get("/getUserData", (req, res) => {
+  //try {
+  // Logic of DB call and get user data
 
-// adminauth and if token is valid then only move to the line num 11 otherwise give an error
-
-app.post("/user/login", (req, res) => { // if you dont want auth dont use middleware just call the api 
-  res.send("User logged in successfully!");
-});
-
-app.get("/user/data", userAuth, (req, res) => { // userauth middle take care of all route start with userauth
+  throw new Error("dvbzhjf");
   res.send("User Data Sent");
+  //   } catch (err) {
+  //     res.status(500).send("Some Error contact support team");
+  //   }
+});
+app.use("/", (err, req, res, next) => { // it will handle all unexpected errors
+  if (err) {
+    // Log your error
+    res.status(500).send("something went wrong");
+  }
 });
 
-app.get("/admin/getAllData", (req, res) => {
-  res.send("All Data Sent");
-});
-
-app.get("/admin/deleteUser", (req, res) => {
-  res.send("Deleted a user");
-});
-
-app.listen(3000, () => {
+app.listen(7777, () => {
   console.log("Server is successfully listening on port 7777...");
 });
+
+//always use try and catch and at the end of your code use wild card error handling if 
+
+// try cath miss any error then wild card error mrthod will take care 
