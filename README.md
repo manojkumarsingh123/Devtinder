@@ -10,4 +10,7 @@ This is dev tinder api project
 
 # never trust req.body(beacuse any data can be send in request)
 
+# res.cookie
+
+#
 
